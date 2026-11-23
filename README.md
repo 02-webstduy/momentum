@@ -46,8 +46,9 @@ Use Vite's actual port if it differs. The same frontend request after deployment
 Open a local conversation in this project and follow the `sites-hosting` skill. Workspace registration is optional. Use the directory returned by `get_context` with:
 
 - `webDirectory: "dist"` after the build.
-- `spa: false` for the default single page; use `true` when adding client-side deep routes that need fallback.
-- `functionDirectory: "functions"` only if the application uses the Function. Omit it for static-only delivery.
+- `spa: true` — the app has client-side deep routes (`/project/:projectId`, `/decompose`, `/review`); the flag generates the `index.html` fallback so direct access or refresh on those paths does not 404.
+- `functionDirectory: "functions"` — the Cloud Agent endpoint (POST `/functions/v1/app`).
+- `secretNames: ["LLM_API_KEY"]` — the LLM key is entered in Sites Settings, never in code.
 
 The Sites tools prepare artifacts and generate the publication descriptor; publish completed hosted work by default, unless the user explicitly requests a preview first or defers publication. Do not upload the project root, `node_modules`, `dev`, or source as the web artifact. A successful build or release does not prove an external integration works.
 
